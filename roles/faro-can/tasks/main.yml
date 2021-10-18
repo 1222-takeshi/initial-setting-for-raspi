@@ -1,0 +1,111 @@
+---
+- name: Install build tools
+  apt:
+    name:
+      - make
+      - gcc
+    state: latest
+    update_cache: yes
+  become: yes
+
+# clone repository to /tmp directory.
+# after installation, this will be removed.
+- name: Clone FARO CAN driver from github.
+  git:
+    repo: "{{ farocan_driver_repository_url }}"
+    version: "{{ farocan_version }}"
+    dest: "{{ farocan_clone_dest }}"
+    key_file: "{{ ssh_private_key_path }}"
+
+# Build required driver and tools.
+- name: Build FARO CAN device driver.
+  shell: make
+  args:
+    chdir: "{{ farocan_driver_dir }}"
+  become: yes
+
+- name: Build FARO CAN Uilility file.
+  shell: make
+  args:
+    chdir: "{{ farocan_util_dir }}"
+
+# prepare device driver to load.
+- name: Get Linux kernel version with uname
+  shell: uname -r
+  register: uname_result
+  become: yes
+
+- name: Create FARO CAN Driver directory.
+  file:
+    path: "{{ farocan_driver_dest }}"
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+  become: yes
+
+- name: Copy FARO CAN driver to the selected directory.
+  copy:
+    src: "{{ farocan_driver_file }}"
+    dest: "{{ farocan_driver_dest_file }}"
+    owner: root
+    group: root
+    mode: "0555"
+  become: yes
+
+- name: Copy FARO CAN driver list to /etc/modules-load.d/ .
+  copy:
+    src: "{{ farocan_load_module_list_src }}"
+    dest: "{{ farocan_load_module_list_dest }}"
+    owner: root
+    group: root
+    mode: "0555"
+  become: yes
+
+- name: Execute depmod to load can drivers.
+  shell: depmod
+  become: yes
+
+# prepare systemd configuration.
+- name: Create systemd script directory
+  file:
+    path: "{{ systemd_script_dir }}"
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+  become: yes
+
+- name: Copy FARO can util file to the directory.
+  copy:
+    src: "{{ farocan_util_dir }}/farocand"
+    dest: "{{ systemd_script_dir }}/farocand"
+    owner: root
+    group: root
+    mode: "0555"
+  become: yes
+
+- name: Copy CAN inilizing script to the directory.
+  copy:
+    src: "{{ farocan_config_dir }}/can_interface.sh"
+    dest: "{{ systemd_script_dir }}/can_interface.sh"
+    owner: root
+    group: root
+    mode: "0555"
+  become: yes
+
+- name: Copy faro-can-interface.service to the directory.
+  copy:
+    src: "{{ farocan_config_dir }}/faro-can-interface.service"
+    dest: "{{ systemd_dir }}/system/faro-can-interface.service"
+    owner: root
+    group: root
+    mode: "0555"
+  become: yes
+
+- name: Enable faro-can-interface.service
+  systemd:
+    name: faro-can-interface
+    enabled: yes
+    masked: no
+  become: yes

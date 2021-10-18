@@ -1,0 +1,14 @@
+/media/autoware/LOG/syslog/syslog_{{ ansible_hostname }}.log
+{
+	rotate 180
+	daily
+	missingok
+	notifempty
+	compress
+	dateext
+	dateyesterday
+	dateformat _%Y%m%d
+	postrotate
+		/usr/lib/rsyslog/rsyslog-rotate
+	endscript
+}

@@ -1,0 +1,99 @@
+---
+- name: Install dependencies
+  apt:
+    name:
+      - python3-pip
+    update_cache: yes
+  become: yes
+
+- name: Install python requirements
+  pip:
+    name:
+      - Twisted>=20.0.0,<22.0.0
+      - roslibpy
+    executable: pip3
+  become: yes
+
+- name: Clone bagpacker
+  git:
+    repo: "{{ bagpacker_repository_url }}"
+    dest: "{{ bagpacker_clone_dir }}"
+    version: "{{ bagpacker_version }}"
+
+- name: Create bagpacker install directory
+  file:
+    path: "{{ bagpacker_install_dir }}"
+    state: directory
+    mode: "0755"
+    owner: root
+  become: yes
+
+- name: Create bagpacker's own log directory
+  file:
+    path: "{{ bagpacker_log_dir }}"
+    state: directory
+    mode: "0755"
+    owner: root
+  become: yes
+
+- name: Install bagpacker.sh
+  copy:
+    src: "{{ bagpacker_clone_dir }}/systemd/ros2_bagpacker.sh"
+    dest: "{{ bagpacker_install_dir }}/bagpacker.sh"
+    mode: "0755"
+  become: yes
+
+- name: Install bagpacker
+  copy:
+    src: "{{ bagpacker_clone_dir }}/bagpack"
+    dest: "{{ bagpacker_install_dir }}"
+    mode: "0755"
+  become: yes
+
+- name: Copy bagpacker service file to replace
+  copy:
+    src: "{{ bagpacker_clone_dir }}/systemd/bagpacker.service.orign"
+    dest: "{{ bagpacker_clone_dir }}/systemd/bagpacker.service"
+  become: yes
+
+- name: Replace bagpacker service file
+  replace:
+    path: "{{ bagpacker_clone_dir }}/systemd/bagpacker.service"
+    regexp: CONF_PATH
+    replace: "{{ bagpacker_config_dir }}"
+
+- name: Replace after bagpacker service file
+  replace:
+    path: "{{ bagpacker_clone_dir }}/systemd/bagpacker.service"
+    regexp: sshd.service
+    replace: "{{ bagpacker_after_start_service }}"
+
+- name: Copy bagpacker service file
+  copy:
+    src: "{{ bagpacker_clone_dir }}/systemd/bagpacker.service"
+    dest: "/etc/systemd/system/bagpacker.service"
+  become: yes
+
+- name: Make config directory
+  ansible.builtin.file:
+    path: "{{ bagpacker_config_dir }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+  become: yes
+
+- name: Set config
+  ansible.builtin.template:
+    src: "{{ bagpacker_conf_template }}"
+    dest: "{{ bagpacker_config_dir }}/bagpacker.conf"
+    mode: 0755
+  become: yes
+
+- name: Enable service
+  systemd:
+    name: bagpacker.service
+    daemon_reload: "{{ daemon_reload }}"
+    enabled: yes
+    masked: no
+  become: yes

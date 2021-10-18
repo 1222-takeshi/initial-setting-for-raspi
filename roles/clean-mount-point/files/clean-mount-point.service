@@ -1,0 +1,12 @@
+[Unit]
+Description=Clean ghost mount point
+Wants=local-fs.target
+Before=local-fs-pre.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash -c "source /opt/autoware/services/clean-mount-point/clean-mount-point.sh  /etc/bagpacker/bagpacker.conf"
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

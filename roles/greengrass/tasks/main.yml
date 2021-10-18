@@ -1,0 +1,113 @@
+---
+- name: Install dependencies for Ubuntu 20.04
+  apt:
+    name:
+      - software-properties-common
+    update_cache: yes
+  become: yes
+
+- name: Add Python 3.7 repo for Ubuntu 20.04
+  apt_repository:
+    repo: ppa:deadsnakes/ppa
+  become: yes
+
+- name: Install dependencies
+  apt:
+    name:
+      - wget
+      - python3.7
+      - libpython3.7
+      - openjdk-8-jre
+      - unzip
+    update_cache: yes
+  become: yes
+
+- name: Download greengrass
+  ansible.builtin.get_url:
+    url: https://d1onfpft10uf5o.cloudfront.net/greengrass-core/downloads/1.10.0/greengrass-linux-x86-64-1.10.0.tar.gz
+    dest: /tmp/greengrass-linux-x86-64-1.10.0.tar.gz
+
+- name: Check /greengrass directory
+  ansible.builtin.stat:
+    path: /greengrass
+  register: greengrass_exists
+
+- name: Show message if /greengrass exists
+  ansible.builtin.debug:
+    msg: "/greengrass already exists. Please remove it if you'd like to reinstall."
+  when: greengrass_exists.stat.exists
+
+- name: Unarchive greengrass
+  command:
+    cmd: tar -xzvf /tmp/greengrass-linux-x86-64-1.10.0.tar.gz -C /
+  become: yes
+  when: not greengrass_exists.stat.exists
+
+- name: Add user
+  ansible.builtin.user:
+    name: ggc_user
+    system: true
+    uid: "{% if lookup('env', 'GITHUB_ACTIONS') != 'true' %}{{999}}{% else %}{{omit}}{% endif %}"
+  become: true
+
+- name: Add group
+  ansible.builtin.group:
+    name: ggc_group
+    system: true
+    gid: "{% if lookup('env', 'GITHUB_ACTIONS') != 'true' %}{{998}}{% else %}{{omit}}{% endif %}"
+  become: true
+
+- name: Create autoware directory
+  ansible.builtin.file:
+    path: /opt/autoware
+    state: directory
+    mode: "0755"
+    owner: ggc_user
+  become: true
+
+- name: Create map directory
+  ansible.builtin.file:
+    path: /opt/autoware/maps/pcd
+    state: directory
+    mode: "0755"
+    owner: ggc_user
+  become: true
+
+- name: Find license file
+  ansible.builtin.find:
+    paths: "{{ greengrass_license_find_path }}"
+    patterns:
+      - ^\w+-\w+-\w+-\w+-\w+.zip$
+    use_regex: yes
+  register: license_files
+
+- name: Show license file path
+  ansible.builtin.debug:
+    msg: "{{ license_files.files[0].path }}"
+  when: license_files.files | length > 0
+
+- name: Show license file path
+  ansible.builtin.debug:
+    msg: "No license file was found. Skipping overwriting files under /greengrass."
+  when: license_files.files | length == 0
+
+- name: Unarchive license file
+  command:
+    cmd: "unzip -o {{ item.path }} -d /greengrass"
+  with_items: "{{ license_files.files }}"
+  become: yes
+
+- name: Copy service
+  ansible.builtin.copy:
+    src: greengrass.service
+    dest: /etc/systemd/system/
+    mode: 0755
+  become: yes
+
+- name: Enable service
+  ansible.builtin.systemd:
+    name: greengrass.service
+    daemon_reload: "{{ daemon_reload }}"
+    enabled: yes
+    masked: no
+  become: yes

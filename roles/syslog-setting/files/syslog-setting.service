@@ -1,0 +1,14 @@
+[Unit]
+Description=Syslog setting service
+Requires=bagpacker.service
+After=bagpacker.service
+Before=autoware-launch.service
+
+[Service]
+User=root
+Type=oneshot
+ExecStart=/opt/autoware/services/syslog-setting/run.sh
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

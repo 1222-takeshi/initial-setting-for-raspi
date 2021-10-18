@@ -1,0 +1,14 @@
+[Unit]
+Description=roslean service
+After=local-fs.target
+Before=autoware-launch.service
+
+[Service]
+Type=oneshot
+ExecStart=/opt/autoware/services/clean-ros-log/run.sh
+RemainAfterExit=yes
+User=autoware
+Group=autoware
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,6 @@
+---
+autoware_user_name: autoware
+autoware_user_uid: 1000
+gpio_group_name: gpio
+gpio_gid: 2020
+gpiod_permission_udev_path: /etc/udev/rules.d/90-gpio-permission.rules

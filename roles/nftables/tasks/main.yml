@@ -1,0 +1,22 @@
+---
+- name: Install nftables
+  apt:
+    name:
+      - nftables
+    update_cache: yes
+  become: yes
+
+- name: Copy nftables.conf template
+  ansible.builtin.copy:
+    src: nftables.conf
+    dest: /etc/nftables.conf.sample
+    mode: 0755
+  become: yes
+
+- name: Enable service
+  ansible.builtin.systemd:
+    name: nftables.service
+    daemon_reload: "{{ daemon_reload }}"
+    enabled: yes
+    masked: no
+  become: yes

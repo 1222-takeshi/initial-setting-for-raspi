@@ -1,0 +1,12 @@
+[Unit]
+Description=autoware-launch
+After=network.target chronyd.service
+
+[Service]
+ExecStart=/opt/autoware/services/autoware-launch/run.sh
+KillSignal=SIGINT
+User=root
+Group=root
+
+[Install]
+WantedBy=multi-user.target

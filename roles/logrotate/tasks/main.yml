@@ -1,0 +1,7 @@
+---
+- name: Set conf file
+  ansible.builtin.template:
+    src: "{{ logrotate_systemlog_template }}"
+    dest: /etc/logrotate.d/systemlog
+    mode: 0644
+  become: yes

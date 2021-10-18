@@ -1,0 +1,12 @@
+[Unit]
+Description=rosbridge
+Before=autoware-launch.service
+
+[Service]
+ExecStart=/opt/autoware/services/rosbridge/run.sh
+User=autoware
+Group=autoware
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

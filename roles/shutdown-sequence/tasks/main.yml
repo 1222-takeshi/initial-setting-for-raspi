@@ -1,0 +1,22 @@
+---
+- name: Copy script
+  ansible.builtin.copy:
+    src: run.sh
+    dest: /opt/autoware/services/shutdown-sequence/
+    mode: 0755
+  become: yes
+
+- name: Copy service
+  ansible.builtin.copy:
+    src: shutdown-sequence.service
+    dest: /etc/systemd/system/
+    mode: 0755
+  become: yes
+
+- name: Enable service
+  ansible.builtin.systemd:
+    name: shutdown-sequence.service
+    daemon_reload: "{{ daemon_reload }}"
+    enabled: yes
+    masked: no
+  become: yes

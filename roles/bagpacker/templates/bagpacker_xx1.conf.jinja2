@@ -1,0 +1,90 @@
+[general]
+use-webauto-agent=yes
+vehicle-id=
+project-id=
+environment-id=
+map-version-id=
+output-at=/media/autoware/NVME_JT
+disk-type=internal
+rosbridge-host=192.168.3.10
+rosbridge-port=9090
+setup-shell=/home/autoware/autoware.proj.jpntaxi/install/setup.sh
+ros-domain-id={{ ros_domain_id }}
+rmw-implementation=rmw_cyclonedds_cpp
+recording-type=manual
+recording-mode-values=True
+diag-ok-state=ready,recording
+initial-state=ready
+disk-threshold-warning=30
+disk-threshold-error=10
+upload-dist=gdrive
+recorder=ros2bag
+
+[rosbag]
+topic-list-type=allowlist
+topic-list=
+    /pacmod/(.*)|
+    /vehicle/(.*)|
+    /control/(.*)|
+    /remote/(.*)|
+    (.*)/velodyne_packets|
+    /sensing/lidar/(.*)/livox/(.*)|
+    /sensing/imu/(.*)|
+    /sensing/gnss/(.*)|
+    /sensing/camera/(.*)/camera_info|
+    /sensing/camera/(.*)/image_rect_color/compressed|
+    /sensing/camera/traffic_light/(.*)/image_raw/compressed|
+    /perception/object_recognition/detection/rois(.)|
+    /perception/object_recognition/detection/objects|
+    /perception/object_recognition/tracking/objects|
+    /perception/object_recognition/objects|
+    /perception/traffic_light_recognition/traffic_light_states|
+    /planning/mission_planning/goal|
+    /planning/mission_planning/checkpoint|
+    /planning/mission_planning/route|
+    /planning/scenario_planning/lane_driving/behavior_planning/behavior_velocity_planner/debug/(.*)|
+    /planning/scenario_planning/lane_driving/behavior_planning/path|
+    /planning/scenario_planning/lane_driving/force_lane_change|
+    /planning/scenario_planning/lane_driving/lane_change_approval|
+    /planning/scenario_planning/lane_driving/motion_planning/obstacle_avoidance_planner/trajectory|
+    /planning/scenario_planning/lane_driving/motion_planning/obstacle_stop_planner/debug_values|
+    /planning/scenario_planning/lane_driving/motion_planning/obstacle_stop_planner/debug/marker|
+    /planning/scenario_planning/lane_driving/motion_planning/surround_obstacle_checker/debug/marker|
+    /planning/scenario_planning/lane_driving/motion_planning/surround_obstacle_checker/trajectory|
+    /planning/scenario_planning/lane_driving/trajectory|
+    /planning/scenario_planning/max_velocity|
+    /planning/scenario_planning/parking/trajectory|
+    /planning/scenario_planning/status/stop_reasons|
+    /planning/scenario_planning/scenario_selector/trajectory|
+    /planning/scenario_planning/trajectory|
+    /localization/diagnostics|
+    /localization/twist|
+    /control/current_gate_mode|
+    /system/emergency/is_emergency|
+    /system/emergency/emergency_state|
+    /autoware/engage|
+    /autoware/operation_mode|
+    /tf|
+    /tf_static|
+    /rosout|
+    /awapi/(.*)|
+    /planning/scenario_planning/lane_driving/behavior_planning/debug/traffic_light_state|
+    /backpacker/condition|
+    /planning/scenario_planning/lane_driving/behavior_planning/lane_change_planner/debug/predicted_path_markers|
+    /planning/scenario_planning/lane_driving/lane_change_candidate_path|
+    /planning/scenario_planning/motion_velocity_optimizer/distance_to_stopline|
+    /localization/pose_estimator/pose|
+    /diagnostics_agg|
+    /planning/scenario_planning/lane_driving/behavior_planning/path_with_lane_id|
+    /planning/scenario_planning/motion_velocity_optimizer/debug/(.*)|
+    /webauto/commands/door|
+    /webauto/enable_map_update|
+    /webauto/vehicle_info|
+    /diagnostics
+
+split-type=duration
+split-duration=60
+max-splits=
+# MB
+split-size=1024
+max-cache-size=0

@@ -1,0 +1,14 @@
+[Unit]
+Description=HDD Reader
+Wants=local-fs.target
+After=local-fs.target
+Before=autoware-launch.service
+
+[Service]
+ExecStart=/opt/autoware/services/hdd-reader/run.sh
+Type=forking
+Restart=always
+User=root
+
+[Install]
+WantedBy=multi-user.target

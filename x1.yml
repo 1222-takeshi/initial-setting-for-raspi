@@ -1,0 +1,34 @@
+---
+- hosts: localhost
+  vars_files:
+    - ./vars/x1.yml
+  roles:
+    - { role: additional-fonts, tags: ["additional-fonts"] }
+    - { role: adlink-dio, tags: ["adlink-dio"] }
+    - { role: agent-deployment, tags: ["agent-deployment"] }
+    - { role: autoware-launch, tags: ["autoware-launch"] }
+    - { role: bagpacker, tags: ["bagpacker"] }
+    - { role: chrony, tags: ["chrony"] }
+    - { role: clean-mount-point, tags: ["clean-mount-point"] }
+    - { role: clean-ros-log, tags: ["clean-ros-log"] }
+    - { role: cyclonedds-local, tags: ["cyclonedds-local"] }
+    - { role: external-shutdown, tags: ["external-shutdown"] }
+    - { role: faro-can, tags: ["faro-can"] }
+    - { role: fstab, tags: ["fstab"] }
+    - { role: greengrass, tags: ["greengrass"] }
+    - { role: hdd-reader, tags: ["hdd-reader"] }
+    - { role: keyboard, tags: ["keyboard"] }
+    - { role: logrotate, tags: ["logrotate"] }
+    - { role: mixer-setup, tags: ["mixer-setup"] }
+    - { role: msr-reader, tags: ["msr-reader"] }
+    - { role: nftables, tags: ["nftables"] }
+    - { role: ota-client, tags: ["ota-client"] }
+    - { role: ptpd, tags: ["ptpd"] }
+    - { role: rosbridge, tags: ["rosbridge"] }
+    - { role: rsyslog, tags: ["rsyslog"] }
+    - { role: shutdown-sequence, tags: ["shutdown-sequence"] }
+    - { role: syslog-setting, tags: ["syslog-setting"] }
+    - { role: symlink-built-in-ssd, tags: ["symlink-built-in-ssd"] }
+    - { role: timezone, tags: ["timezone"] }
+      # NOTE: This role is required until high leve api is supported by all the autoware.
+    - { role: touch-enablehighlevelapi, tags: ["touch-enablehighlevelapi"] }

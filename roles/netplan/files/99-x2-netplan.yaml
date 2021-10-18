@@ -1,0 +1,37 @@
+network:
+  version: 2
+  ethernets:
+    # internet
+    enp2s0f1:
+      dhcp4: true
+      dhcp6: false
+    # HMI
+    enp2s0f0:
+      addresses: [192.168.30.11/24]
+      dhcp4: false
+      dhcp6: false
+    # LiDAR#1
+    enp3s0:
+      addresses: [192.168.110.11/24]
+      dhcp4: false
+      dhcp6: false
+    # LiDAR#2
+    enp4s0:
+      addresses: [192.168.120.11/24]
+      dhcp4: false
+      dhcp6: false
+    # Perception
+    enp5s0:
+      addresses: [192.168.20.11/24]
+      dhcp4: false
+      dhcp6: false
+    # GNSS
+    enp6s0:
+      addresses: [192.168.100.11/24]
+      dhcp4: false
+      dhcp6: false
+    # Sub ECU
+    eno1:
+      addresses: [192.168.10.11/24]
+      dhcp4: false
+      dhcp6: false

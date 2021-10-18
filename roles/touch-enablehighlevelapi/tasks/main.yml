@@ -1,0 +1,16 @@
+---
+- name: Create autoware highlevelapi directory
+  file:
+    path: /opt/autoware/highlevelapi
+    state: directory
+    mode: "0755"
+    owner: ggc_user
+  become: true
+
+- name: create EnableHighLevelAPI
+  copy:
+    src: EnableHighLevelAPI
+    dest: /opt/autoware/highlevelapi
+    mode: 0644
+    owner: ggc_user
+  become: yes

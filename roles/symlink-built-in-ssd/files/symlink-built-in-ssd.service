@@ -1,0 +1,15 @@
+[Unit]
+Description=Create symlink to built-in SSD
+RequiresMountsFor=/
+Before=autoware-launch.service
+ConditionPathExists=!/etc/udev/rules.d/70-persistent-disk.rules
+
+[Service]
+ExecStart=/opt/autoware/services/symlink-built-in-ssd/run.sh
+Type=oneshot
+User=root
+Group=root
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

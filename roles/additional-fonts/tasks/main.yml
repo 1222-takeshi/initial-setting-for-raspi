@@ -1,0 +1,7 @@
+---
+- name: Install fonts for Japanese enviroment
+  apt:
+    name: "{{ additional_font_packages }}"
+    state: latest
+    update_cache: yes
+  become: yes

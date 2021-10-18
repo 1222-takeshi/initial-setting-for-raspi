@@ -1,0 +1,6 @@
+---
+ota_client_repository_url: https://github.com/tier4/ota-client
+ota_client_clone_dir: /tmp/ota-client
+ota_client_boot_dir: /boot/ota
+ota_client_install_dir: /opt/ota/client
+ota_client_version: v0.0.3

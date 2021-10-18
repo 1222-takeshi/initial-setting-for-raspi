@@ -1,0 +1,5 @@
+---
+autoware_install_dir: /home/autoware/autoware.proj
+vehicle_id: default
+vehicle_model: ymc_golfcart_proto2
+ros_domain_id: 100

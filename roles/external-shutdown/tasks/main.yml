@@ -1,0 +1,22 @@
+---
+- name: Install required packages
+  apt:
+    name:
+      - acpid
+    update_cache: yes
+  become: yes
+
+- name: Copy config
+  ansible.builtin.copy:
+    src: powerbtn
+    dest: /etc/acpi/events
+    mode: 0644
+  become: yes
+
+- name: Enable and restart acpid
+  systemd:
+    name: acpid
+    state: restarted
+    daemon_reload: no
+    enabled: yes
+  become: yes

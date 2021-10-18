@@ -1,0 +1,252 @@
+[general]
+use-webauto-agent=yes
+vehicle-id=
+project-id=
+environment-id=
+map-version-id=
+output-at=/media/autoware/ROSBAG
+disk-type=external
+rosbridge-host=127.0.0.1
+rosbridge-port=9090
+setup-shell=/home/autoware/autoware.proj/install/setup.sh
+ros-domain-id={{ ros_domain_id }}
+rmw-implementation=rmw_cyclonedds_cpp
+recording-type=manual
+recording-mode-values=True
+diag-ok-state=ready,recording
+initial-state=recording
+disk-threshold-warning=30
+disk-threshold-error=10
+upload-dist=gdrive
+recorder=ros2bag
+
+[rosbag]
+topic-list=
+    /autoware/driving_capability
+    |/autoware/engage
+    |/autoware/state
+    |/awapi/autoware/get/route
+    |/awapi/autoware/get/status
+    |/awapi/autoware/get/stop_speed_exceeded
+    |/awapi/autoware/put/crosswalk_states
+    |/awapi/autoware/put/emergency_stop
+    |/awapi/autoware/put/engage
+    |/awapi/autoware/put/expand_stop_range
+    |/awapi/autoware/put/gate_mode
+    |/awapi/autoware/put/goal
+    |/awapi/autoware/put/intersection_states
+    |/awapi/autoware/put/pose_initialization_request
+    |/awapi/autoware/put/route
+    |/awapi/lane_change/get/status
+    |/awapi/lane_change/put/approval
+    |/awapi/lane_change/put/force
+    |/awapi/object_avoidance/get/status
+    |/awapi/object_avoidance/put/approval
+    |/awapi/prediction/get/objects
+    |/awapi/traffic_light/get/nearest_traffic_light_status
+    |/awapi/traffic_light/get/status
+    |/awapi/traffic_light/put/traffic_light_status
+    |/awapi/vehicle/get/door
+    |/awapi/vehicle/get/status
+    |/awapi/vehicle/put/door
+    |/awapi/vehicle/put/stop
+    |/awapi/vehicle/put/velocity
+    |/clock
+    |/control/control_cmd
+    |/control/current_gate_mode
+    |/control/shift_cmd
+    |/control/shift_decider/shift_cmd
+    |/control/trajectory_follower/control_cmd
+    |/control/trajectory_follower/lane_departure_checker_node/debug/deviation/lateral
+    |/control/trajectory_follower/lane_departure_checker_node/debug/deviation/yaw
+    |/control/trajectory_follower/lane_departure_checker_node/debug/deviation/yaw_deg
+    |/control/trajectory_follower/lane_departure_checker_node/debug/marker_array
+    |/control/trajectory_follower/lane_departure_checker_node/debug/processing_time_ms
+    |/control/trajectory_follower/lateral/control_cmd
+    |/control/trajectory_follower/longitudinal/control_cmd
+    |/control/trajectory_follower/mpc_follower/debug/debug_values
+    |/control/trajectory_follower/mpc_follower/debug/markers
+    |/control/trajectory_follower/mpc_follower/debug/mpc_calc_time
+    |/control/trajectory_follower/mpc_follower/debug/steering_cmd
+    |/control/trajectory_follower/predicted_trajectory
+    |/control/trajectory_follower/velocity_controller/debug_values
+    |/control/turn_signal_cmd
+    |/control/vehicle_cmd
+    |/diagnostics
+    |/diagnostics_agg
+    |/diagnostics_err
+    |/diagnostics_toplevel_state
+    |/foa/traffic_light_recognition/traffic_light_states
+    |/g30esli/command
+    |/g30esli/debug/command
+    |/g30esli/debug/status
+    |/g30esli/engage
+    |/g30esli/from_can_bus
+    |/g30esli/socket_can_receiver/transition_event
+    |/g30esli/socket_can_sender/transition_event
+    |/g30esli/status
+    |/g30esli/to_can_bus
+    |/initialpose
+    |/initialpose3d
+    |/joint_states
+    |/localization/debug/ellipse_marker
+    |/localization/pose_estimator/exe_time_ms
+    |/localization/pose_estimator/initial_pose_with_covariance
+    |/localization/pose_estimator/initial_to_result_distance
+    |/localization/pose_estimator/initial_to_result_distance_new
+    |/localization/pose_estimator/initial_to_result_distance_old
+    |/localization/pose_estimator/iteration_num
+    |/localization/pose_estimator/monte_carlo_initial_pose_marker
+    |/localization/pose_estimator/ndt_marker
+    |/localization/pose_estimator/points_aligned
+    |/localization/pose_estimator/pose
+    |/localization/pose_estimator/pose_with_covariance
+    |/localization/pose_estimator/transform_probability
+    |/localization/pose_twist_fusion_filter/debug
+    |/localization/pose_twist_fusion_filter/debug/measured_pose
+    |/localization/pose_twist_fusion_filter/estimated_yaw_bias
+    |/localization/pose_twist_fusion_filter/pose
+    |/localization/pose_twist_fusion_filter/pose_with_covariance_without_yawbias
+    |/localization/pose_twist_fusion_filter/pose_without_yawbias
+    |/localization/pose_twist_fusion_filter/twist
+    |/localization/pose_twist_fusion_filter/twist_with_covariance
+    |/localization/pose_with_covariance
+    |/localization/twist
+    |/localization/twist_estimator/twist
+    |/localization/twist_estimator/twist_with_covariance
+    |/localization/util/crop_box_filter_measurement_range/crop_box_polygon
+    |/localization/util/pose_initialization_request
+    |/map/vector_map
+    |/map/vector_map_marker
+    |/pacmod/as_rx/rear_pass_door_cmd
+    |/pacmod/parsed_tx/global_rpt
+    |/pacmod/parsed_tx/rear_pass_door_rpt
+    |/parameter_events
+    |/perception/object_recognition/objects
+    |/perception/object_recognition/objects/visualization
+    |/perception/traffic_light_recognition/debug/exe_time_ms
+    |/perception/traffic_light_recognition/debug/markers
+    |/perception/traffic_light_recognition/debug/rois
+    |/perception/traffic_light_recognition/debug/rois/compressed
+    |/perception/traffic_light_recognition/debug/rois/compressedDepth
+    |/perception/traffic_light_recognition/debug/rois/theora
+    |/perception/traffic_light_recognition/output/debug/image
+    |/perception/traffic_light_recognition/output/debug/image/compressed
+    |/perception/traffic_light_recognition/output/debug/image/compressedDepth
+    |/perception/traffic_light_recognition/output/debug/image/theora
+    |/perception/traffic_light_recognition/rois
+    |/perception/traffic_light_recognition/rough/rois
+    |/perception/traffic_light_recognition/traffic_light_map_based_detector/debug/markers
+    |/perception/traffic_light_recognition/traffic_light_states
+    |/planning/mission_planning/checkpoint
+    |/planning/mission_planning/echo_back_goal_pose
+    |/planning/mission_planning/goal
+    |/planning/mission_planning/route
+    |/planning/mission_planning/route_marker
+    |/planning/scenario_planning/current_max_velocity
+    |/planning/scenario_planning/lane_driving/behavior_planning/behavior_velocity_planner/debug/blind_spot
+    |/planning/scenario_planning/lane_driving/behavior_planning/behavior_velocity_planner/debug/crosswalk
+    |/planning/scenario_planning/lane_driving/behavior_planning/behavior_velocity_planner/debug/detection_area
+    |/planning/scenario_planning/lane_driving/behavior_planning/behavior_velocity_planner/debug/intersection
+    |/planning/scenario_planning/lane_driving/behavior_planning/behavior_velocity_planner/debug/path
+    |/planning/scenario_planning/lane_driving/behavior_planning/behavior_velocity_planner/debug/stop_line
+    |/planning/scenario_planning/lane_driving/behavior_planning/behavior_velocity_planner/debug/traffic_light
+    |/planning/scenario_planning/lane_driving/behavior_planning/behavior_velocity_planner/input/external_crosswalk_states
+    |/planning/scenario_planning/lane_driving/behavior_planning/behavior_velocity_planner/input/external_intersection_states
+    |/planning/scenario_planning/lane_driving/behavior_planning/behavior_velocity_planner/output/stop_reason
+    |/planning/scenario_planning/lane_driving/behavior_planning/debug/traffic_light_state
+    |/planning/scenario_planning/lane_driving/behavior_planning/lane_change_planner/debug/drivable_area
+    |/planning/scenario_planning/lane_driving/behavior_planning/lane_change_planner/debug/predicted_path_markers
+    |/planning/scenario_planning/lane_driving/behavior_planning/path
+    |/planning/scenario_planning/lane_driving/behavior_planning/path_with_lane_id
+    |/planning/scenario_planning/lane_driving/force_lane_change
+    |/planning/scenario_planning/lane_driving/lane_change_approval
+    |/planning/scenario_planning/lane_driving/lane_change_available
+    |/planning/scenario_planning/lane_driving/lane_change_candidate_path
+    |/planning/scenario_planning/lane_driving/lane_change_ready
+    |/planning/scenario_planning/lane_driving/motion_planning/obstacle_avoidance_planner/debug/area_with_objects
+    |/planning/scenario_planning/lane_driving/motion_planning/obstacle_avoidance_planner/debug/clearance_map
+    |/planning/scenario_planning/lane_driving/motion_planning/obstacle_avoidance_planner/debug/marker
+    |/planning/scenario_planning/lane_driving/motion_planning/obstacle_avoidance_planner/debug/object_clearance_map
+    |/planning/scenario_planning/lane_driving/motion_planning/obstacle_avoidance_planner/debug/smoothed_points
+    |/planning/scenario_planning/lane_driving/motion_planning/obstacle_avoidance_planner/trajectory
+    |/planning/scenario_planning/lane_driving/motion_planning/obstacle_stop_planner/debug/marker
+    |/planning/scenario_planning/lane_driving/motion_planning/obstacle_stop_planner/debug_values
+    |/planning/scenario_planning/lane_driving/motion_planning/obstacle_stop_planner/input/expand_stop_range
+    |/planning/scenario_planning/lane_driving/motion_planning/surround_obstacle_checker/debug/marker
+    |/planning/scenario_planning/lane_driving/motion_planning/surround_obstacle_checker/trajectory
+    |/planning/scenario_planning/lane_driving/obstacle_avoidance_approval
+    |/planning/scenario_planning/lane_driving/obstacle_avoidance_candidate_trajectory
+    |/planning/scenario_planning/lane_driving/obstacle_avoidance_ready
+    |/planning/scenario_planning/lane_driving/trajectory
+    |/planning/scenario_planning/max_velocity
+    |/planning/scenario_planning/motion_velocity_optimizer/closest_acceleration
+    |/planning/scenario_planning/motion_velocity_optimizer/closest_jerk
+    |/planning/scenario_planning/motion_velocity_optimizer/closest_velocity
+    |/planning/scenario_planning/motion_velocity_optimizer/debug/trajectory_external_velocity_limited
+    |/planning/scenario_planning/motion_velocity_optimizer/debug/trajectory_lateral_acc_filtered
+    |/planning/scenario_planning/motion_velocity_optimizer/debug/trajectory_raw
+    |/planning/scenario_planning/motion_velocity_optimizer/debug/trajectory_time_resampled
+    |/planning/scenario_planning/motion_velocity_optimizer/distance_to_stopline
+    |/planning/scenario_planning/motion_velocity_optimizer/stop_speed_exceeded
+    |/planning/scenario_planning/parking/costmap_generator/grid_map
+    |/planning/scenario_planning/parking/costmap_generator/occupancy_grid
+    |/planning/scenario_planning/parking/freespace_planner/debug/partial_pose_array
+    |/planning/scenario_planning/parking/freespace_planner/debug/pose_array
+    |/planning/scenario_planning/parking/trajectory
+    |/planning/scenario_planning/scenario
+    |/planning/scenario_planning/scenario_selector/trajectory
+    |/planning/scenario_planning/status/no_start_reason
+    |/planning/scenario_planning/status/stop_reason
+    |/planning/scenario_planning/status/stop_reasons
+    |/planning/scenario_planning/trajectory
+    |/planning/turn_signal_decider/turn_signal_cmd
+    |/remote/control_cmd
+    |/remote/emergency_stop
+    |/remote/gate_mode_cmd
+    |/remote/latest_raw_control_cmd
+    |/remote/raw_control_cmd
+    |/remote/shift_cmd
+    |/remote/turn_signal_cmd
+    |/robot_description
+    |/rosout
+    |/sensing/camera/traffic_light/camera_info
+    |/sensing/gnss/pose_with_covariance
+    |/sensing/gnss/ublox/nav_sat_fix
+    |/sensing/lidar/concatenate_no_ground_data/concat_num
+    |/sensing/lidar/concatenate_no_ground_data/not_subscribed_topic_name
+    |/sensing/lidar/front_center/livox/imu
+    |/sensing/lidar/front_center/livox/lidar
+    |/sensing/lidar/front_left/livox/lidar
+    |/sensing/lidar/front_right/livox/lidar
+    |/sensing/lidar/no_ground/concatenated/pointcloud
+    |/sensing/lidar/no_ground/pointcloud
+    |/sensing/lidar/top/velodyne_packets
+    |/simulation/dummy_perception_publisher/object_info
+    |/system/autoware_version
+    |/system/emergency/control_cmd
+    |/system/emergency/hazard_status
+    |/system/emergency/is_emergency
+    |/system/emergency/emergency_state
+    |/system/emergency/shift_cmd
+    |/system/emergency/turn_signal_cmd
+    |/system/state_timeout_checker/is_state_timeout
+    |/tf
+    |/tf_static
+    |/vehicle/engage
+    |/vehicle/status/battery_charge
+    |/vehicle/status/control_mode
+    |/vehicle/status/shift
+    |/vehicle/status/steering
+    |/vehicle/status/steering_wheel_deg
+    |/vehicle/status/turn_signal
+    |/vehicle/status/twist
+    |/vehicle/status/velocity_kmph
+
+topic-list-type=allowlist
+split-type=duration
+split-duration=60
+max-splits=
+# MB
+split-size=1024
+max-cache-size=10000

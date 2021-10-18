@@ -1,0 +1,7 @@
+---
+- name: Set conf file
+  ansible.builtin.template:
+    src: "{{ rsyslog_systemlog_template }}"
+    dest: /etc/rsyslog.d/systemlog.conf
+    mode: 0644
+  become: yes

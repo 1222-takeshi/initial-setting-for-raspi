@@ -1,0 +1,4 @@
+---
+daemon_reload: "{{ reload_systemd | default('yes') }}"
+bagpacker_conf_template: "bagpacker_xx1.conf.jinja2"
+ros_domain_id: 100
