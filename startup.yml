@@ -5,3 +5,4 @@
   roles:
     - { role: apt-install, tags: ["apt-install"] }
     - { role: git-config, tags: ["git-config"] }
+    - { role: vscode, tags: ["vscode"] }
