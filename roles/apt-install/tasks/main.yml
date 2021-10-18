@@ -1,21 +1,9 @@
 ---
-- name: install git
+- name: install git vim terminator
   apt:
     name:
       - git
-    update_cache: yes
-  become: yes
-
-- name: install vim
-  apt:
-    name:
       - vim
-    update_cache: yes
-  become: yes
-
-- name: install terminator
-  apt:
-    name:
       - terminator
     update_cache: yes
   become: yes
