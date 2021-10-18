@@ -1,5 +1,0 @@
-XKBMODEL="pc105"
-XKBLAYOUT="jp"
-XKBVARIANT=""
-XKBOPTIONS="terminate:ctrl_alt_bksp"
-BACKSPACE="guess"

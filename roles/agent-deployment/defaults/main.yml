@@ -1,4 +1,0 @@
----
-ota_internal_repository_url: git@github.com:tier4/ota-internal
-ota_internal_clone_dir: /tmp/ota-internal
-ota_agent_deployment_install_dir: /opt/ota/agent-deployment

@@ -1,3 +1,0 @@
----
-maxslewrate: 1000
-smoothtime: "400 0.001 leaponly"

@@ -1,9 +1,0 @@
----
-- name: Copy keyboard layout file
-  copy:
-    src: "{{ item }}"
-    dest: "/etc/default/keyboard"
-    mode: "0644"
-  with_items:
-    - "{{ keyboard_layout_file }}"
-  become: yes

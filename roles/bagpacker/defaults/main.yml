@@ -1,8 +1,0 @@
----
-bagpacker_repository_url: git@github.com:tier4/bagpacker
-bagpacker_clone_dir: /tmp/bagpacker
-bagpacker_version: "v0.8.7"
-bagpacker_install_dir: /opt/bagpacker/bin
-bagpacker_log_dir: /var/log/bagpacker
-bagpacker_config_dir: /etc/bagpacker
-bagpacker_after_start_service: cyclonedds-local.service

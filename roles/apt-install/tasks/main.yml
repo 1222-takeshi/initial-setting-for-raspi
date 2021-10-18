@@ -12,3 +12,10 @@
       - vim
     update_cache: yes
   become: yes
+
+- name: install terminator
+  apt:
+    name:
+      - terminator
+    update_cache: yes
+  become: yes

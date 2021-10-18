@@ -1,2 +1,0 @@
----
-greengrass_license_find_path: "{{ lookup('env', 'HOME') }}\/Downloads"
