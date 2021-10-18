@@ -3,6 +3,6 @@
   vars_files:
     - ./vars/mysetting.yml
   roles:
-    - { role: apt-install, tags: ["apt-install"] }
+    - { role: common, tags: ["common"] }
     - { role: git-config, tags: ["git-config"] }
     - { role: vscode, tags: ["vscode"] }
