@@ -1,4 +1,7 @@
 ---
 - hosts: localhost
+  vars_files:
+    - ./vars/mysetting.yml
   roles:
     - { role: apt-install, tags: ["apt-install"] }
+    - { role: git-config, tags: ["git-config"] }
