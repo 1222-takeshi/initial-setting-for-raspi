@@ -1,0 +1,11 @@
+---
+- name: Copy netplan yaml
+  ansible.builtin.copy:
+    src: 50-cloud-init.yaml
+    dest: /etc/netplan/
+    mode: 0755
+  become: yes
+
+- name: Apply netplan
+  command: netplan apply
+  become: yes
