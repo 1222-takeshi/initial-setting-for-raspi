@@ -1,0 +1,1 @@
+# initial-setting-for-raspi
