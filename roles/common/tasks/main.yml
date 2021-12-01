@@ -1,10 +1,9 @@
 ---
-- name: install git vim terminator ccache ag htop
+- name: install git vim ccache ag htop
   apt:
     name:
       - git
       - vim
-      - terminator
       - ccache
       - silversearcher-ag
       - htop
