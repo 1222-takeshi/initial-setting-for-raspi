@@ -7,5 +7,6 @@
       - ccache
       - silversearcher-ag
       - htop
+      - WiringPi
     update_cache: yes
   become: yes
