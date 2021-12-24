@@ -3,22 +3,10 @@
   vars_files:
     - ./vars/main.yml
   become: no
-  vars_prompt:
-    - name: yn_gpu
-      prompt: "Would you like to install the optional GPU modules (cuda: 11.1, cudnn: 8.0.5, TensorRT: 7.2.1)? (y/n)"
-      default: "y"
-      private: no
-  pre_tasks:
-    - pause:
-        seconds: 10
-        prompt: "[Warning]: Skipping installation of GPU modules. To execute nodes depending on TensorRT, please manually install the modules listed above."
-      when: yn_gpu != 'y'
   roles:
     - { role: common, tags: ["common"] }
     # - { role: git-config, tags: ["git-config"] }
     # - { role: vscode, tags: ["vscode"] }
-    # - { role: cuda, when: yn_gpu == 'y', tags: ["cuda"] }
-    # - { role: tensorrt, when: yn_gpu == 'y', tags: ["tensorrt"] }
     # - { role: ros, rosdistro: noetic, tags: ["ros"] }
-    # - { role: ros2, rosdistro: galactic, tags: ["ros2"] }
+    - { role: ros2, rosdistro: galactic, tags: ["ros2"] }
     # - { role: docker, tags: ["docker"] }
