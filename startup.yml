@@ -8,5 +8,5 @@
     # - { role: git-config, tags: ["git-config"] }
     # - { role: vscode, tags: ["vscode"] }
     # - { role: ros, rosdistro: noetic, tags: ["ros"] }
-    - { role: ros2, rosdistro: foxy, tags: ["ros2"] }
+    - { role: ros2, tags: ["ros2"] }
     # - { role: docker, tags: ["docker"] }
