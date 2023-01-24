@@ -1,3 +1,5 @@
 ---
 user_name: hogehoge
 user_email: hogehoge@example.com
+rosdistro: humble
+package: ros-base
