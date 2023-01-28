@@ -8,6 +8,6 @@ I have a lot of hobbies, but I think that it can be used for general purposes by
 ## Usage
 
 ```sh
-pip3 install -U "ansible==5.*"
+(pip3 install -U "ansible==5.*" or sudo apt install ansible)
 ansible-playbook startup.yml --ask-become-pass
 ```
