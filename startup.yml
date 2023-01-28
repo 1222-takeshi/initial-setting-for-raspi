@@ -9,4 +9,5 @@
     # - { role: vscode, tags: ["vscode"] }
     # - { role: ros, rosdistro: noetic, tags: ["ros"] }
     - { role: ros2, tags: ["ros2"] }
+    - { role: swap_setting, tags: ["swap_setting"] }
     # - { role: docker, tags: ["docker"] }

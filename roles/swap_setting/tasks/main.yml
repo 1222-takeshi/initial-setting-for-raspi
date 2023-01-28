@@ -1,0 +1,38 @@
+- name: Swap (check swap space)
+  stat:
+    path: /swapfile
+  register: swapfile
+
+- name: Swap off
+  command: swapoff /swapfile
+  when: swapfile.stat.exists
+  become: true
+
+- name: Remove swapfile
+  file:
+    state: absent
+    path: /swapfile
+  when: swapfile.stat.exists
+  become: true
+
+- name: Create swap space
+  command: fallocate -l 4G /swapfile
+  changed_when: false
+  become: true
+
+- name: Adding Authority
+  file:
+    dest: /swapfile
+    mode: "0600"
+  changed_when: false
+  become: true
+
+- name: Make swapfile
+  command: mkswap /swapfile
+  changed_when: false
+  become: true
+
+- name: Swap on
+  command: swapon /swapfile
+  changed_when: false
+  become: true
